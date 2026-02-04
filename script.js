@@ -28,19 +28,17 @@ let obstacles = [];
 
 // Input
 // Input
-let lastTouchTime = 0;
-
 function jump(e) {
-    if (e.type === 'keydown' && e.code !== 'Space') return;
-
-    // Prevent double firing: if mousedown fires right after touchstart
-    if (e.type === 'mousedown') {
-        if (Date.now() - lastTouchTime < 500) return;
+    if (e.type === 'keydown') {
+        if (e.code !== 'Space') return;
     }
 
-    if (e.type === 'touchstart') {
-        e.preventDefault(); // Prevent scrolling and ghost clicks
-        lastTouchTime = Date.now();
+    // Ignore clicks on buttons (like restart)
+    if (e.target.closest('button')) return;
+
+    // For pointer events, prevent default to stop scrolling/highlighting logic conflicts
+    if (e.type === 'pointerdown') {
+        e.preventDefault();
     }
 
     if (!isGameRunning && !isGameOver) {
@@ -51,9 +49,11 @@ function jump(e) {
 }
 
 document.addEventListener('keydown', jump);
-document.addEventListener('touchstart', jump, { passive: false });
-document.addEventListener('mousedown', jump);
-restartBtn.addEventListener('click', resetGame);
+document.addEventListener('pointerdown', jump);
+restartBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    resetGame();
+});
 
 function startGame() {
     isGameRunning = true;
