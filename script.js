@@ -27,18 +27,17 @@ let spawnInterval;
 let obstacles = [];
 
 // Input
+const jumpBtn = document.getElementById('jump-btn');
+
 // Input
 function jump(e) {
-    if (e.type === 'keydown') {
-        if (e.code !== 'Space') return;
-    }
+    // Only allow explicit inputs
+    if (e.type === 'keydown' && e.code !== 'Space') return;
 
-    // Ignore clicks on buttons (like restart)
-    if (e.target.closest('button')) return;
-
-    // For pointer events, prevent default to stop scrolling/highlighting logic conflicts
-    if (e.type === 'pointerdown') {
+    // For the button, we stop propagation to avoid any document-level bubbling issues
+    if (e.type !== 'keydown') {
         e.preventDefault();
+        e.stopPropagation();
     }
 
     if (!isGameRunning && !isGameOver) {
@@ -48,8 +47,13 @@ function jump(e) {
     }
 }
 
+// Keyboard always works
 document.addEventListener('keydown', jump);
-document.addEventListener('pointerdown', jump);
+
+// Touch/Click only works on the specific button now
+// We use pointerdown to be responsive
+jumpBtn.addEventListener('pointerdown', jump);
+
 restartBtn.addEventListener('click', (e) => {
     e.stopPropagation();
     resetGame();
