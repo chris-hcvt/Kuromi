@@ -27,9 +27,21 @@ let spawnInterval;
 let obstacles = [];
 
 // Input
+// Input
+let lastTouchTime = 0;
+
 function jump(e) {
     if (e.type === 'keydown' && e.code !== 'Space') return;
-    if (e.type === 'touchstart') e.preventDefault(); // Prevent scrolling
+
+    // Prevent double firing: if mousedown fires right after touchstart
+    if (e.type === 'mousedown') {
+        if (Date.now() - lastTouchTime < 500) return;
+    }
+
+    if (e.type === 'touchstart') {
+        e.preventDefault(); // Prevent scrolling and ghost clicks
+        lastTouchTime = Date.now();
+    }
 
     if (!isGameRunning && !isGameOver) {
         startGame();
@@ -39,7 +51,7 @@ function jump(e) {
 }
 
 document.addEventListener('keydown', jump);
-document.addEventListener('touchstart', jump);
+document.addEventListener('touchstart', jump, { passive: false });
 document.addEventListener('mousedown', jump);
 restartBtn.addEventListener('click', resetGame);
 
