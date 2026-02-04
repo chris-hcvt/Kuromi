@@ -1,0 +1,244 @@
+:root {
+    --kuromi-black: #2a2a2e;
+    --kuromi-pink: #ff99d1;
+    --kuromi-white: #ffffff;
+    --bg-grad-start: #2c003e;
+    --bg-grad-end: #51007a;
+    --pipe-color: #ff99d1;
+    --pipe-border: #fff;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: #000;
+    font-family: 'Fredoka One', cursive;
+    overflow: hidden;
+}
+
+#game-container {
+    width: 360px;
+    height: 640px;
+    background: linear-gradient(180deg, var(--bg-grad-start), var(--bg-grad-end));
+    position: relative;
+    overflow: hidden;
+    border: 4px solid var(--kuromi-pink);
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(255, 153, 209, 0.4);
+}
+
+#score-board {
+    position: absolute;
+    top: 40px;
+    width: 100%;
+    text-align: center;
+    font-size: 40px;
+    color: var(--kuromi-white);
+    z-index: 10;
+    text-shadow: 2px 2px 0 #000;
+}
+
+/* --- KUROMI CSS SPRITE --- */
+#kuromi {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    left: 50px;
+    top: 300px;
+    z-index: 20;
+    /* Rotation center for jump animation */
+    transform-origin: center;
+}
+
+/* Head Shape (Black Hood) */
+#kuromi .head {
+    width: 46px;
+    height: 40px;
+    background: var(--kuromi-black);
+    border-radius: 50% 50% 45% 45%;
+    position: absolute;
+    top: 10px;
+    left: 2px;
+    z-index: 2;
+}
+
+/* Ears */
+#kuromi .ear {
+    width: 14px;
+    height: 24px;
+    background: var(--kuromi-black);
+    position: absolute;
+    top: -5px;
+    z-index: 1;
+}
+
+#kuromi .ear.left {
+    left: 2px;
+    border-radius: 50% 20% 0 0;
+    transform: rotate(-15deg);
+}
+
+#kuromi .ear.right {
+    right: 2px;
+    border-radius: 20% 50% 0 0;
+    transform: rotate(15deg);
+}
+
+/* White Face Area */
+#kuromi .face-white {
+    width: 34px;
+    height: 24px;
+    background: var(--kuromi-white);
+    border-radius: 50% 50% 45% 45%;
+    position: absolute;
+    top: 12px;
+    left: 6px;
+    z-index: 3;
+}
+
+/* Eyes */
+#kuromi .eye {
+    width: 4px;
+    height: 6px;
+    background: var(--kuromi-black);
+    border-radius: 50%;
+    position: absolute;
+    top: 8px;
+}
+
+#kuromi .eye.left {
+    left: 8px;
+}
+
+#kuromi .eye.right {
+    right: 8px;
+}
+
+/* Nose */
+#kuromi .nose {
+    width: 3px;
+    height: 2px;
+    background: var(--kuromi-pink);
+    border-radius: 50%;
+    position: absolute;
+    top: 13px;
+    left: 15.5px;
+}
+
+/* Mouth */
+#kuromi .mouth {
+    width: 6px;
+    height: 3px;
+    border-bottom: 1px solid var(--kuromi-black);
+    border-radius: 0 0 50% 50%;
+    position: absolute;
+    top: 15px;
+    left: 14px;
+}
+
+/* Blushes */
+#kuromi .blush {
+    width: 4px;
+    height: 2px;
+    background: rgba(255, 105, 180, 0.5);
+    border-radius: 50%;
+    position: absolute;
+    top: 10px;
+}
+
+#kuromi .blush.left {
+    left: 4px;
+}
+
+#kuromi .blush.right {
+    right: 4px;
+}
+
+/* Pink Skull on Head */
+#kuromi .skull {
+    width: 10px;
+    height: 9px;
+    background: var(--kuromi-pink);
+    border-radius: 4px;
+    position: absolute;
+    top: 2px;
+    left: 18px;
+    z-index: 4;
+}
+
+#kuromi .skull-face {
+    width: 2px;
+    height: 2px;
+    background: #5b2a42;
+    border-radius: 50%;
+    position: absolute;
+    top: 3px;
+    left: 2px;
+    box-shadow: 4px 0 0 #5b2a42;
+    /* second eye */
+}
+
+
+/* --- OBSTACLES --- */
+.obstacle {
+    position: absolute;
+    width: 50px;
+    background: var(--pipe-color);
+    border: 2px solid var(--pipe-border);
+    border-radius: 4px;
+}
+
+.obstacle.top {
+    top: 0;
+    border-bottom: 4px solid var(--pipe-border);
+}
+
+.obstacle.bottom {
+    bottom: 0;
+    border-top: 4px solid var(--pipe-border);
+}
+
+
+/* --- UI --- */
+#game-over,
+#start-screen {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.85);
+    padding: 20px;
+    border-radius: 10px;
+    color: white;
+    text-align: center;
+    border: 2px solid var(--kuromi-pink);
+    z-index: 100;
+}
+
+.hidden {
+    display: none !important;
+}
+
+button {
+    margin-top: 15px;
+    padding: 10px 20px;
+    background: var(--kuromi-pink);
+    border: none;
+    border-radius: 20px;
+    font-family: inherit;
+    font-size: 16px;
+    cursor: pointer;
+    color: white;
+}
+
+button:hover {
+    transform: scale(1.05);
+}

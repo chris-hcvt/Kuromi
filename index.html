@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kuromi Escape: CSS Edition</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div id="game-container">
+        <div id="sky">
+            <div id="score-board">0</div>
+
+            <!-- The CSS Kuromi Sprite -->
+            <div id="kuromi">
+                <div class="ear left"></div>
+                <div class="ear right"></div>
+                <div class="head">
+                    <div class="skull">
+                        <div class="skull-face"></div>
+                        <div class="skull-bones"></div>
+                    </div>
+                    <div class="face-white">
+                        <div class="eye left"></div>
+                        <div class="eye right"></div>
+                        <div class="nose"></div>
+                        <div class="mouth"></div>
+                        <div class="blush left"></div>
+                        <div class="blush right"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Obstacle Container -->
+            <div id="obstacle-container"></div>
+
+            <div id="game-over" class="hidden">
+                <h1>Game Over!</h1>
+                <p>Score: <span id="final-score">0</span></p>
+                <button id="restart-btn">Try Again</button>
+            </div>
+
+            <div id="start-screen">
+                <h1>Kuromi Fly</h1>
+                <p>Press Space or Tap to Start</p>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
